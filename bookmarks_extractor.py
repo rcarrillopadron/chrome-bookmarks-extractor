@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import datetime
 import contextlib
 import typing
-
 from bookmark import Bookmark
 
 
@@ -23,5 +22,6 @@ class BookmarksExtractor:
             bookmarks.append(bookmark)
         return bookmarks
 
-    def __parse_date(self, timestamp: str) -> datetime.datetime:
+    @staticmethod
+    def __parse_date(timestamp: str) -> datetime.datetime:
         return datetime.datetime.fromtimestamp(int(timestamp))

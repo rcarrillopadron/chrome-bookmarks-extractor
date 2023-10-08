@@ -1,14 +1,9 @@
-from bs4 import BeautifulSoup
-import datetime
 import contextlib
 import pathlib
 import sys
 
-
-from bookmark import Bookmark
 from bookmarks_extractor import BookmarksExtractor
 from markdown_generator import MarkdownGenerator
-
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
