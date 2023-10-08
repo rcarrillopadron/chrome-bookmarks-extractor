@@ -17,11 +17,11 @@ class MarkdownGenerator:
         lines.append("| # | Domain | Date | Bookmark |")
         lines.append("|---|--------|------|----------|")
         for index, bookmark in enumerate(bookmarks):
-            line = self.generate_row(index, bookmark)
+            line = self.generate_row(row_number=index + 1, bookmark=bookmark)
             lines.append(line)
         return "\n".join(lines)
 
-    def generate_row(self, index: int, bookmark: Bookmark) -> str:
+    def generate_row(self, row_number: int, bookmark: Bookmark) -> str:
         domain = bookmark.get_domain()
         readable_date = bookmark.get_readable_date()
-        return f"| {index} | {domain} | {readable_date} | [{bookmark.text}]({bookmark.href}) |"
+        return f"| {row_number} | {domain} | {readable_date} | [{bookmark.text}]({bookmark.href}) |"
