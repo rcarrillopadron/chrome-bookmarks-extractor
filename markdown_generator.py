@@ -3,6 +3,22 @@ import typing
 
 from bookmark import Bookmark
 
+def escape_text(text: str) -> str:
+    parts = text.replace("\n", "").replace("[", "\\[").replace("]", "\\]").replace("|", "\\|")
+    return " ".join(parts.split())
+
+def generate_row(row_number: int, bookmark: Bookmark) -> str:
+    domain = bookmark.get_domain()
+    readable_date = bookmark.get_readable_date()
+    text = escape_text(bookmark.text)
+    parent_title = escape_text(bookmark.parent_title)
+    return f"| {row_number} | {domain} | {readable_date} | [{text}]({bookmark.href}) | {parent_title} |"
+
+def generate_table_header() -> typing.List[str]:
+    lines = []
+    lines.append("| # | Domain | Date | Bookmark | Parent Title |")
+    lines.append("|---|--------|------|----------|--------------|")
+    return lines
 
 class MarkdownGenerator:
     def generate_markdown(self, bookmarks: typing.List[Bookmark]) -> str:
@@ -13,18 +29,6 @@ class MarkdownGenerator:
     def generate_markdown_table(self, bookmarks: typing.List[Bookmark]) -> str:
         lines = generate_table_header()
         for index, bookmark in enumerate(bookmarks):
-            line = self.generate_row(row_number=index + 1, bookmark=bookmark)
+            line = generate_row(row_number=index + 1, bookmark=bookmark)
             lines.append(line)
         return "\n".join(lines)
-
-    @staticmethod
-    def generate_row(row_number: int, bookmark: Bookmark) -> str:
-        domain = bookmark.get_domain()
-        readable_date = bookmark.get_readable_date()
-        return f"| {row_number} | {domain} | {readable_date} | [{bookmark.text}]({bookmark.href}) | {bookmark.parent_title} |"
-    
-    def generate_table_header() -> typing.List[str]:
-        lines = []
-        lines.append("| # | Domain | Date | Bookmark | Parent Title |")
-        lines.append("|---|--------|------|----------|--------------|")
-        return lines
