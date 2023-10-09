@@ -1,9 +1,7 @@
-from bs4 import BeautifulSoup
-import typing
 import os
+import typing
 
 from bookmark import Bookmark
-from bookmarks_extractor import BookmarksExtractor
 
 
 class MarkdownGenerator:
