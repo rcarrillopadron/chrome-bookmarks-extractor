@@ -1,5 +1,10 @@
 {
     "recommendations": [
-        "ms-python.python"
+        "donjayamanne.python-environment-manager",
+        "njpwerner.autodocstring",
+        "ms-python.black-formatter",
+        "tamasfe.even-better-toml",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
     ]
 }
