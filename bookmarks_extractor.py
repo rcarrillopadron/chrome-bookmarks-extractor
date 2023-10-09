@@ -1,12 +1,13 @@
+from pathlib import Path
 from bs4 import BeautifulSoup
+from bookmark import Bookmark
 import datetime
 import contextlib
 import typing
-from bookmark import Bookmark
 
 
 class BookmarksExtractor:
-    def extract_bookmarks(self, filename: str) -> typing.List[Bookmark]:
+    def extract_bookmarks(self, filename: Path) -> typing.List[Bookmark]:
         with contextlib.ExitStack() as stack:
             file = stack.enter_context(open(filename, "r", encoding="utf-8"))
             return self.__parse_file(file)
