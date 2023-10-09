@@ -13,13 +13,14 @@ class BookmarksExtractor:
             return self.__parse_file(file)
 
     def __parse_file(self, file) -> typing.List[Bookmark]:
-        soup = BeautifulSoup(file, "html.parser")
+        soup = BeautifulSoup(file, "html5lib") # html.parser, html5lib         
         bookmarks = []
         for link in soup.find_all("a"):
             href = link.get("href")
             add_date = link.get("add_date")
             date = self.__parse_date(add_date)
-            bookmark = Bookmark(link.text, href, date)
+            parent_title = link.find_parent().find_parent().find_parent().find_next("h3").text
+            bookmark = Bookmark(link.text, href, date, parent_title)
             bookmarks.append(bookmark)
         return bookmarks
 

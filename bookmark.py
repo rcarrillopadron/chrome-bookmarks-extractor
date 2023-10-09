@@ -6,6 +6,7 @@ class Bookmark(typing.NamedTuple):
     text: str
     href: str
     date: datetime.datetime
+    parent_title: str
 
     def get_domain(self) -> str:
         return self.href.split("/")[2]
